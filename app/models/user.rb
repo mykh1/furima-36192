@@ -4,8 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :items
-  has_many :order_histories
+
 
   with_options presence: true do
    validates :nickname
@@ -22,5 +21,11 @@ class User < ApplicationRecord
     validates :first_name_reading
   end
 
+  # PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  # validates_format_of :password, with: PASSWORD_REGEX, message: "is invalid. Input half-width alphanumeric."}
  
+  # validates :password format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: "is invalid. Input half-width alphanumeric."}
+
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  validates_format_of :password, on: :create, with: PASSWORD_REGEX, message: "is invalid. Input half-width alphanumeric."
 end
