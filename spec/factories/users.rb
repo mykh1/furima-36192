@@ -9,5 +9,6 @@ FactoryBot.define do
     last_name_reading { 'ヤマダ' }
     first_name_reading { 'タロウ'}
     birthday { '1900-01-01' }
+    
   end
 end

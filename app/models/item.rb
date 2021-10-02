@@ -11,12 +11,10 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence: true do
-  #商品画像を1枚つけることが必須であること。
   validates :image
-  #商品名が必須であること。
   validates :item_name
-  #商品の説明が必須であること。
   validates :item_description
+
   end
 
   with_options presence: true, numericality: { other_than: 0 , message: "can't be blank" } do
@@ -29,7 +27,4 @@ class Item < ApplicationRecord
 
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid" }
   
-  #入力された価格によって、販売手数料や販売利益の表示が変わること。
-
-
 end
