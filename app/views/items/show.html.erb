@@ -3,17 +3,22 @@
 <%# 商品の概要 %>
 <div class="item-show">
   <div class="item-box">
+
     <h2 class="name">
       <%= @item.item_name %>
     </h2>
     <div class="item-img-content">
+
       <%= image_tag @item.image, class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <div class="sold-out">
-        <%#<span>Sold Out!!</span>%>
-      </div>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+
+        <%if @item.order_history.present?%>
+          <div class="sold-out">
+            <span>Sold Out!!</span>
+          </div>
+        <%end%>
+
     </div>
+    
     <div class="item-price-box">
       <span class="item-price">
       ¥<%= @item.price %>
@@ -21,7 +26,9 @@
       <span class="item-postage">
         <%= @item.shipping_cost.name %>
       </span>
+
     </div>
+
 
     <% if user_signed_in? %>
       <% if current_user.id == @item.user_id %>
