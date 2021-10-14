@@ -1,6 +1,6 @@
 class OrderHistoryAddress
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefecture_id, :city, :house_number, :building_name, :telephone_number, :item_id, :user_id
+  attr_accessor :postal_code, :prefecture_id, :city, :house_number, :building_name, :telephone_number, :item_id, :user_id, :token
 
   with_options presence: true do
     validates :user_id
@@ -10,6 +10,7 @@ class OrderHistoryAddress
     validates :city
     validates :house_number
     validates :telephone_number, format: {with: /\A[0-9]{10,11}\z/, message: "is invalid"}
+    validates :token
   end
 
 

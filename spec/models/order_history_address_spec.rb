@@ -20,6 +20,11 @@ RSpec.describe OrderHistoryAddress, type: :model do
     end
 
     context '内容に問題がある場合' do
+      it 'tokenが空だと購入できない' do
+        @order_history_address.token = ''
+        @order_history_address.valid?
+        expect(@order_history_address.errors.full_messages).to include("Token can't be blank")
+      end
       it '郵便番号が空だと購入できない' do
         @order_history_address.postal_code = ''
         @order_history_address.valid?
@@ -51,12 +56,12 @@ RSpec.describe OrderHistoryAddress, type: :model do
         @order_history_address.valid?
         expect(@order_history_address.errors.full_messages).to include("Telephone number is invalid")
       end
-      it '電話番号は9桁以下の半角数値では購入できない' do
+      it '電話番号は半角数字9桁以下では購入できない' do
         @order_history_address.telephone_number = '080123456'
         @order_history_address.valid?
         expect(@order_history_address.errors.full_messages).to include("Telephone number is invalid")
       end
-      it '電話番号は12桁以上の半角数値では購入できない' do
+      it '電話番号は半角数字12桁以上では購入できない' do
         @order_history_address.telephone_number = '080123456789'
         @order_history_address.valid?
         expect(@order_history_address.errors.full_messages).to include("Telephone number is invalid")
