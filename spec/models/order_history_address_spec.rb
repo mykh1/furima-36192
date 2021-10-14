@@ -56,6 +56,11 @@ RSpec.describe OrderHistoryAddress, type: :model do
         @order_history_address.valid?
         expect(@order_history_address.errors.full_messages).to include("Telephone number is invalid")
       end
+      it '電話番号が全角では購入できない' do
+        @order_history_address.telephone_number = '０８０１２３４５６７８'
+        @order_history_address.valid?
+        expect(@order_history_address.errors.full_messages).to include("Telephone number is invalid")
+      end
       it '電話番号は半角数字9桁以下では購入できない' do
         @order_history_address.telephone_number = '080123456'
         @order_history_address.valid?
