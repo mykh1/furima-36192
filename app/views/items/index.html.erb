@@ -136,19 +136,17 @@
       <li class='list'>
       
         <%= link_to item_path(item.id), method: :get do %>
+
           <div class='item-img-content'>
-            <%#= image_tag "item-sample.png", class: "item-img" %>          
-            <%# 商品が売れていればsold outを表示しましょう %>
-            <%#<div class='sold-out'>
-              <%#<span>Sold Out!!</span>
-            </div>
-            <%# //商品が売れていればsold outを表示しましょう %>
+            <%= image_tag item.image, class: "item-img" %>          
+              <%if item.order_history.present?%>
+                <div class='sold-out'>
+                  <span>Sold Out!!</span>
+                </div>
+              <% end %>
           </div>
           
-          
           <div class='item-info'>
-
-            <%= image_tag item.image, class: 'item-img' %>
             <h3 class='item-name'>
               <%= item.item_name %>
             </h3>
